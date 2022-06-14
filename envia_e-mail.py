@@ -24,8 +24,11 @@ with open('imagem.jpg', 'rb') as image:
     msg.attach(img)
 
 with smtplib.SMTP(host='smtp.office365.com', port=587) as smtp:
-    smtp.ehlo()
-    smtp.starttls()
-    smtp.login(meu_email, minha_senha)
-    smtp.send_message(msg)
-    print('E-mail enviado com sucesso.')
+    try:
+        smtp.ehlo()
+        smtp.starttls()
+        smtp.login(meu_email, minha_senha)
+        smtp.send_message(msg)
+        print('E-mail enviado com sucesso.')
+    except Exception as error:
+        print('ERRO -> ', error)
